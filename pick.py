@@ -1,30 +1,55 @@
 import re
 import os
 
+def cleanScreen():
+    if (os.name)=='posix':
+        os.system('clear')
+    if (os.name)=='nt':
+        os.system('cls')
+
+def presEnter(): # Pone el cartel de presione Enter para continuar y limpia la pantalla.
+    print()
+    input("Press Enter to continue...")
+    cleanScreen()
+
+
+
 # gets the path for the file
 
-script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-rel_path = "kjb.txt"
-abs_file_path = os.path.join(script_dir, rel_path)
+scriptDir = os.path.dirname(__file__) #<-- absolute dir the script is in
+relPath = "kjb.txt"
+absFilePath = os.path.join(scriptDir, relPath)
 
 #open text file in read mode
-text_file = open(abs_file_path, "r")
+textFile = open(absFilePath, "r")
  
 #read whole file to a string
-data = text_file.read()
+data = textFile.read()
  
 #close file
-text_file.close()
+textFile.close()
 
 # asks for a letter, case sensitive
 
-letra = input("Elegir una letra: ")
-
+cleanScreen()
+option = 100
+while option != 0:
+    print("  KJB Picker")
+    print()
+    print("  1 Run script")
+    print("  0 Exit")
+    print()
+    option = int(input(" Choose an option: "))
+    if option == 1:
+        letter = input("\n Pick a letter: ")
 # stores all words starting with the desired letter in a list
-
-palabra = re.findall(rf"\b{letra}\w+", data)
-
+        word = re.findall(rf"\b{letter}\w+", data)
 #prints the first letter
-
-print(f"La primera palabra que empieza con la letra {letra} es {palabra[0]} y se repite {len(palabra)} veces.")
-
+        print(f"\n The first word that starts with the letter {letter} is {word[0]} and repeats {len(word)} times.")
+        presEnter()
+    elif option == 0:
+        print(" Goodbye")
+        presEnter()
+    else:
+        print(" Incorrect option")
+        presEnter()
