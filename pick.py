@@ -1,7 +1,14 @@
 import re
+import os
+
+# gets the path for the file
+
+script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+rel_path = "kjb.txt"
+abs_file_path = os.path.join(script_dir, rel_path)
 
 #open text file in read mode
-text_file = open("C:/Users/fgonz/OneDrive/Documentos/Dev/kjb-pick/kjb.txt", "r")
+text_file = open(abs_file_path, "r")
  
 #read whole file to a string
 data = text_file.read()
@@ -20,3 +27,4 @@ palabra = re.findall(rf"\b{letra}\w+", data)
 #prints the first letter
 
 print(f"La primera palabra que empieza con la letra {letra} es {palabra[0]} y se repite {len(palabra)} veces.")
+
